@@ -33,7 +33,7 @@ echo <<<EOT
     	<div>
     		<h1>Locadora Cactus</h1>
             <a href="index.php"><i class="fas fa-home"></i>Inicio</a>
-            <a href="reservas.php"><i class="fas fa-car"></i>Realizar Reservas</a>
+            <a href="reservas.php"><i class="fas fa-car"></i>Reservas</a>
             <a href="cadastrarcarros.php"><i class="fas fa-plus"></i>Cadastrar Carros</a>
             <a href="cadastrocliente.php"><i class="fas fa-user-plus"></i>Cadastro Cliente</a>
             <a href="cadastrofunc.php"><i class="fas fa-user-plus"></i>Cadastro Funcionarios</a>

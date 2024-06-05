@@ -129,7 +129,7 @@ button:hover {
 
       <div class="form-group">
         <label for="nome">Número da Agência</label>
-        <input type="nome" id="nome" name="nome" required>
+        <input type="nome" id="num_agencia" name="num_agencia" required>
       </div>
 
       <button type="submit">Cadastrar</button>

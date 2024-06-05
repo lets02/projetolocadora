@@ -1,7 +1,31 @@
 <?php
 include 'functions.php';
+$pdo = pdo_connect_pgsql();
+$msg = '';
+// Verifica se os dados POST não estão vazios
+if (!empty($_POST)) {
+    // Se os dados POST não estiverem vazios, insere um novo registro
+    // Configura as variáveis que serão inserid_contatoas. Devemos verificar se as variáveis POST existem e, se não existirem, podemos atribuir um valor padrão a elas.
+    // Verifica se a variável POST "nome" existe, se não existir, atribui o valor padrão para vazio, basicamente o mesmo para todas as variáveis
+    $disponibilidade= isset($_POST['disponibilidade']) ? $_POST['disponibilidade'] : '';
+    $placa = isset($_POST['placa']) ? $_POST['placa'] : '';
+    $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : '';
+    $ano = isset($_POST['ano']) ? $_POST['ano'] : '';
+    $modelo = isset($_POST['modelo']) ? $_POST['modelo'] : '';
+    $id_carro = isset($_POST['id_carro']) ? $_POST['id_carro'] : '';
+   
+    try{
+      // Insere um novo registro na tabela contacts
+    $stmt = $pdo->prepare('INSERT INTO carro (disponibilidade, placa, tipo, ano, modelo) VALUES (?, ?, ?, ?, ?)');
+    $stmt->execute([$disponibilidade, $placa, $tipo, $ano, $modelo]);
+    // Mensagem de saída
+    $msg = 'Cadastro Carro Realizado com Sucesso!';
+    } catch (Exception $e){
+      $msg = $e;
+    }
+    
+}
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,44 +98,35 @@ include 'functions.php';
 
   <div class="container">
     <h1>Cadastro de Carros</h1>
-    <form>
+    <form action="cadastrarcarros.php" method="POST">
       <div>
-        <label for="marca">Marca:</label>
-        <input type="text" id="marca" name="marca" required>
+        <label for="disponibilidade">Disponibilidade:</label>
+        <input type="disponibiidade" id="disponibilidade" name="disponibilidade" required>
+      </div>
+      <div>
+        <label for="placa">Placa:</label>
+        <input type="placa" id="placa" name="placa" required>
+      </div>
+      <div>
+        <label for="tipo">Tipo:</label>
+        <input type="tipo" id="tipo" name="tipo" required>
+      </div>
+      <div>
+        <label for="ano">Ano:</label>
+        <input type="text" id="ano" name="ano" required>
       </div>
       <div>
         <label for="modelo">Modelo:</label>
         <input type="text" id="modelo" name="modelo" required>
       </div>
-      <div>
-        <label for="ano">Ano:</label>
-        <input type="number" id="ano" name="ano" required>
-      </div>
-      <div>
-        <label for="cor">Cor:</label>
-        <input type="text" id="cor" name="cor" required>
-      </div>
-      <div>
-        <label for="placa">Placa:</label>
-        <input type="text" id="placa" name="placa" required>
-      </div>
-      <div>
-        <label for="categoria">Categoria:</label>
-        <select id="categoria" name="categoria" required>
-          <option value="">Selecione a categoria</option>
-          <option value="popular">Popular</option>
-          <option value="intermediario">Intermediário</option>
-          <option value="luxo">Luxo</option>
-        </select>
-      </div>
-      <div>
-        <label for="diaria">Diária:</label>
-        <input type="number" id="diaria" name="diaria" step="0.01" required>
-      </div>
+
       <div>
         <button type="submit">Cadastrar Carro</button>
       </div>
     </form>
+  </div>
+
+  <p><?=$msg?></p>
   </div>
 
   <?=template_footer()?>

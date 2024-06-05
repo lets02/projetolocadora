@@ -145,6 +145,11 @@ button:hover {
 
 
       <button type="submit">Cadastrar</button>
+      <br>
+      <button type="submit">Excluir</button>
+      <br>
+      <button type="submit">Alterar</button>
+
     </form>
     <p><?=$msg?></p>
   </div>

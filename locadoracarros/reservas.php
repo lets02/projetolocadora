@@ -100,6 +100,10 @@ include 'functions.php';
       <button type="submit">Reservar Carro</button>
     </form>
   </div>
+<br>
+<div>
+  <button href="excluirreservas.php" type="submit">Excluir Reservas</button>
+  </div>
 
   <?=template_footer()?>
 </body>
