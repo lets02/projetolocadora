@@ -1,6 +1,9 @@
 <?php
 include 'functions.php';
 
+// Inicialize a variável de resultado
+$resultado = [];
+
 // Verificar se o formulário de pesquisa foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Limpar e validar o termo de pesquisa
@@ -8,9 +11,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($search)) {
         $error = 'Por favor, insira o modelo do carro para pesquisar.';
     } else {
-        // Redirecionar para a página de resultados de pesquisa com o termo de pesquisa como parâmetro GET
-        header("Location: search_results.php?search=$search");
-        exit();
+        // Consultar o banco de dados para recuperar os carros correspondentes à pesquisa
+        $pdo = pdo_connect_pgsql();
+        $stmt = $pdo->prepare("SELECT * FROM Carro WHERE Modelo LIKE ?");
+        $stmt->execute(["%$search%"]);
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>
@@ -33,33 +38,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="content read">
     <h3>Resultados da Pesquisa</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Modelo</th>
-                <th>Marca</th>
-                <th>Ano</th>
-                <th>Preço</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($car = mysqli_fetch_assoc($resultado)): ?>
+    <?php if (!empty($resultado)): ?>
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td><?=$car['id_carro']?></td>
-                    <td><?=$car['modelo']?></td>
-                    <td><?=$car['marca']?></td>
-                    <td><?=$car['ano']?></td>
-                    <td>R$ <?=number_format($car['preco'], 2, ',', '.')?></td>
-                    <td class="actions">
-                        <a href="update.php?id=<?=$car['id_carro']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
-                        <a href="delete.php?id=<?=$car['id_carro']?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Excluir</a>
-                    </td>
+                    <th>ID</th>
+                    <th>Modelo</th>
+                    <th>Disponibilidade</th>
+                    <th>Placa</th>
+                    <th>Tipo</th>
+                    <th>Ano</th>
+                    <th>Ações</th>
                 </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($resultado as $car): ?>
+                    <tr>
+                        <td><?=$car['id_carro']?></td>
+                        <td><?=$car['modelo']?></td>
+                        <td><?=$car['disponibilidade']?></td>
+                        <td><?=$car['placa']?></td>
+                        <td><?=$car['tipo']?></td>
+                        <td><?=$car['ano']?></td>
+                        <td class="actions">
+                            <a href="editarcarros.php?id_carro=<?=$car['Id_Carro']?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</a>
+                            <a href="excluircarros.php?id_carro=<?=$car['Id_Carro']?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Excluir</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
 </div>
 
 <?=template_footer()?>

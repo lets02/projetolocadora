@@ -90,7 +90,7 @@ include 'functions.php';
       </div>
     </div>
     <div class="card">
-      <img src="img/civic.webp" alt="Carro">
+      <img src="img/compacto.png" alt="Carro">
       <div class="card-content">
         <h3>Carro Compacto</h3>
         <p>Ideal para você que precisa de um carro prático e econômico.</p>
@@ -98,7 +98,7 @@ include 'functions.php';
       </div>
     </div>
     <div class="card">
-      <img src="img/hilux.webp" alt="Carro">
+      <img src="img/i627243.jpeg" alt="Carro">
       <div class="card-content">
         <h3>Caminhonete</h3>
         <p>Leve sua família e seus pertences com a nossa caminhonete.</p>
@@ -106,7 +106,7 @@ include 'functions.php';
       </div>
     </div>
     <div class="card">
-      <img src="img/onix.webp" alt="Carro">
+      <img src="img/gm-brazil-2017-chevrolet-prisma-011.webp" alt="Carro">
       <div class="card-content">
         <h3>Carro Médio</h3>
         <p>Conforto e espaço para você e seus amigos.</p>

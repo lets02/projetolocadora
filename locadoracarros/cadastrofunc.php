@@ -128,7 +128,7 @@ button:hover {
       </div>
 
       <div class="form-group">
-        <label for="nome">Número da Agência</label>
+        <label for="num_agencia">Número da Agência</label>
         <input type="nome" id="num_agencia" name="num_agencia" required>
       </div>
 

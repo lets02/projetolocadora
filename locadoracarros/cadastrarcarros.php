@@ -126,6 +126,15 @@ if (!empty($_POST)) {
     </form>
   </div>
 
+  <div>
+    
+  <div style="text-align: center;">
+    <br><br><br>   <br><br><br>
+    <form method="post" action="listarcarro1.php">
+        <button type="submit">Listar Carros</button>
+    </form>
+</div>
+
   <p><?=$msg?></p>
   </div>
 
